@@ -1,556 +1,3589 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Yojana Adhikari</title>
-  <meta name="description" content="Yojana Adhikari">
-  <meta name="keywords" content="Yojana Adhikari">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <title>Yojana Adhikari — UI/UX Designer</title>
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&display=swap"
+    rel="stylesheet"
+  >
 
- <!--Disable Right Click-->
-  <script>
-    document.addEventListener("contextmenu", function(event) {
-        event.preventDefault();
-    });
-</script>
+  <style>
+    :root {
+      --bg: #090909;
+      --bg-soft: #111111;
 
-<style>
-  body {
-      user-select: none; /* Disable text selection */
-  }
-</style>
+      --text: #f3f3f1;
+      --soft: rgba(243, 243, 241, 0.68);
+      --muted: rgba(243, 243, 241, 0.38);
+      --faint: rgba(243, 243, 241, 0.14);
+
+      --cream: #eaeaea;
+
+      --page:
+        min(
+          1360px,
+          calc(100% - 96px)
+        );
+
+      --ease:
+        cubic-bezier(
+          .22,
+          .75,
+          .22,
+          1
+        );
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100%;
+
+      overflow-x: hidden;
+
+      background:
+        radial-gradient(
+          circle at 50% -10%,
+          rgba(210, 210, 210, 0.10),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 16% 64%,
+          rgba(150, 150, 150, 0.045),
+          transparent 27%
+        ),
+        linear-gradient(
+          180deg,
+          #080808 0%,
+          #0a0a0a 52%,
+          #090909 100%
+        );
+
+      color: var(--text);
+
+      font-family:
+        "Instrument Sans",
+        sans-serif;
+
+      -webkit-font-smoothing:
+        antialiased;
+
+      opacity: 0;
+
+      animation:
+        pageOpen
+        1.05s
+        var(--ease)
+        forwards;
+    }
+
+    body::before {
+      content: "";
+
+      position: fixed;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      opacity: 0.028;
+
+      background-image:
+        url(
+          "data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.24'/%3E%3C/svg%3E"
+        );
+
+      z-index: 999;
+
+      mix-blend-mode:
+        soft-light;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .container {
+      width: var(--page);
+      margin: 0 auto;
+    }
+
+
+    /* =========================
+       HEADER
+    ========================== */
+
+    .header {
+      position: fixed;
+
+      top: 0;
+      left: 0;
+
+      width: 100%;
+
+      z-index: 100;
+
+      padding: 24px 0;
+
+      transition:
+        background .35s ease,
+        backdrop-filter .35s ease;
+    }
+
+    .header.scrolled {
+      background:
+        rgba(9, 9, 9, 0.78);
+
+      backdrop-filter:
+        blur(16px);
+    }
+
+    .header-inner {
+      display: flex;
+
+      align-items: center;
+
+      justify-content:
+        space-between;
+    }
+
+    .brand {
+      font-size: 14px;
+      font-weight: 580;
+
+      letter-spacing:
+        -0.02em;
+    }
+
+    .nav {
+      display: flex;
+
+      gap: 28px;
+
+      align-items: center;
+    }
+
+    .nav a {
+      position: relative;
+
+      font-size: 13px;
+
+      color: var(--muted);
+
+      transition:
+        color .25s ease;
+    }
+
+    .nav a::after {
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      bottom: -5px;
+
+      width: 100%;
+      height: 1px;
+
+      background:
+        currentColor;
+
+      transform:
+        scaleX(0);
+
+      transform-origin:
+        right;
+
+      transition:
+        transform
+        .35s
+        var(--ease);
+    }
+
+    .nav a:hover {
+      color: var(--text);
+    }
+
+    .nav a:hover::after {
+      transform:
+        scaleX(1);
+
+      transform-origin:
+        left;
+    }
+
+
+    /* =========================
+       HERO
+    ========================== */
+
+    .hero {
+      position: relative;
+
+      isolation: isolate;
+
+      overflow: hidden;
+
+      min-height: 94svh;
+
+      display: flex;
+
+      align-items: center;
+
+      padding:
+        126px 0 76px;
+    }
+
+    .hero::before {
+      content: "";
+
+      position: absolute;
+
+      width: 440px;
+      height: 440px;
+
+      left: 5%;
+      top: 6%;
+
+      border-radius: 50%;
+
+      background:
+        rgba(190, 190, 190, 0.055);
+
+      filter: blur(50px);
+    }
+
+    .hero::after {
+      content: "";
+
+      position: absolute;
+
+      width: 360px;
+      height: 360px;
+
+      right: 2%;
+      bottom: 5%;
+
+      border-radius: 50%;
+
+      background:
+        rgba(140, 140, 140, 0.035);
+
+      filter: blur(50px);
+    }
+
+    .hero-content {
+      position: relative;
+
+      z-index: 5;
+
+      max-width: 1080px;
+
+      margin: 0 auto;
+
+      text-align: center;
+    }
+
+
+    /* PORTRAIT */
+
+    .portrait-wrap {
+      width: 102px;
+      height: 102px;
+
+      margin:
+        0 auto 26px;
+
+      overflow: hidden;
+
+      border-radius: 50%;
+
+      box-shadow:
+        0 22px 60px
+        rgba(0, 0, 0, .32);
+
+      opacity: 0;
+
+      transform:
+        translateY(16px)
+        scale(.96);
+
+      animation:
+        heroIn
+        .95s
+        var(--ease)
+        .08s
+        forwards;
+    }
+
+    .portrait-wrap img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      object-position:
+        50% 30%;
+
+      filter:
+        saturate(.82)
+        contrast(1.02)
+        brightness(.93);
+
+      transition:
+        transform
+        .8s
+        var(--ease);
+    }
+
+    .portrait-wrap:hover img {
+      transform:
+        scale(1.05);
+    }
+
+
+    /* HERO TEXT */
+
+    .hero-meta {
+      margin-bottom: 20px;
+
+      font-size: 13px;
+
+      color: var(--muted);
+
+      opacity: 0;
+
+      animation:
+        heroIn
+        .9s
+        var(--ease)
+        .16s
+        forwards;
+    }
+
+    .hero-title {
+      max-width: 1020px;
+
+      margin: 0 auto;
+
+      font-size:
+        clamp(
+          58px,
+          7vw,
+          100px
+        );
+
+      line-height: .97;
+
+      letter-spacing:
+        -.066em;
+
+      font-weight: 530;
+
+      text-wrap: balance;
+    }
+
+    .hero-title .line {
+      display: block;
+      overflow: hidden;
+    }
+
+    .hero-title .line span {
+      display: block;
+
+      transform:
+        translateY(115%);
+
+      animation:
+        titleIn
+        1s
+        var(--ease)
+        forwards;
+    }
+
+    .hero-title
+    .line:nth-child(1)
+    span {
+      animation-delay: .20s;
+    }
+
+    .hero-title
+    .line:nth-child(2)
+    span {
+      color:
+        rgba(
+          243,
+          243,
+          241,
+          .42
+        );
+
+      animation-delay: .28s;
+    }
+
+    .hero-copy {
+      max-width: 610px;
+
+      margin:
+        28px auto 0;
+
+      font-size: 16px;
+
+      line-height: 1.62;
+
+      letter-spacing:
+        -.012em;
+
+      color: var(--soft);
+
+      opacity: 0;
+
+      transform:
+        translateY(10px);
+
+      animation:
+        heroIn
+        .9s
+        var(--ease)
+        .38s
+        forwards;
+    }
+
+    .hero-link {
+      display: inline-flex;
+
+      margin-top: 28px;
+
+      font-size: 14px;
+
+      font-weight: 560;
+
+      opacity: 0;
+
+      transform:
+        translateY(8px);
+
+      animation:
+        heroIn
+        .85s
+        var(--ease)
+        .46s
+        forwards;
+    }
+
+    .hero-link span {
+      position: relative;
+
+      padding-bottom: 4px;
+    }
+
+    .hero-link span::after {
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      bottom: 0;
+
+      width: 100%;
+      height: 1px;
+
+      background:
+        rgba(
+          243,
+          243,
+          241,
+          .52
+        );
+
+      transform-origin:
+        left;
+
+      transition:
+        transform
+        .35s
+        var(--ease);
+    }
+
+    .hero-link:hover
+    span::after {
+      transform:
+        scaleX(.3);
+    }
+
+
+    /* =========================
+       FIGMA HERO PROPS
+    ========================== */
+
+    .design-props {
+      position: absolute;
+
+      inset: 0;
+
+      z-index: 1;
+
+      pointer-events: none;
+
+      opacity: 0;
+
+      animation:
+        propsIn
+        1.15s
+        var(--ease)
+        .34s
+        forwards;
+    }
+
+    .design-props > * {
+      will-change:
+        transform;
+    }
+
+    .selection-frame {
+      position: absolute;
+
+      left: 7%;
+      top: 31%;
+
+      width: 25%;
+      height: 30%;
+
+      border:
+        1px dashed
+        rgba(
+          243,
+          243,
+          241,
+          .26
+        );
+
+      animation:
+        propFloatA
+        6.4s
+        ease-in-out
+        -1.2s
+        infinite alternate;
+    }
+
+    .selection-frame
+    .handle {
+      position: absolute;
+
+      width: 7px;
+      height: 7px;
+
+      background:
+        rgba(
+          243,
+          243,
+          241,
+          .84
+        );
+    }
+
+    .tl {
+      left: -4px;
+      top: -4px;
+    }
+
+    .tr {
+      right: -4px;
+      top: -4px;
+    }
+
+    .bl {
+      left: -4px;
+      bottom: -4px;
+    }
+
+    .br {
+      right: -4px;
+      bottom: -4px;
+    }
+
+    .tm {
+      left: 50%;
+      top: -4px;
+
+      transform:
+        translateX(-50%);
+    }
+
+    .bm {
+      left: 50%;
+      bottom: -4px;
+
+      transform:
+        translateX(-50%);
+    }
+
+    .frame-tag {
+      position: absolute;
+
+      left: 8.5%;
+      top: 26%;
+
+      padding:
+        6px 9px;
+
+      border-radius: 7px;
+
+      border:
+        1px solid
+        rgba(
+          243,
+          243,
+          241,
+          .09
+        );
+
+      background:
+        rgba(
+          243,
+          243,
+          241,
+          .055
+        );
+
+      color:
+        rgba(
+          243,
+          243,
+          241,
+          .42
+        );
+
+      font-size: 11px;
+
+      backdrop-filter:
+        blur(8px);
+
+      animation:
+        propFloatA
+        7.1s
+        ease-in-out
+        -2.6s
+        infinite alternate;
+    }
+
+    .dimension-label {
+      position: absolute;
+
+      right: 9%;
+      top: 29%;
+
+      font-size: 11px;
+
+      letter-spacing:
+        .08em;
+
+      color:
+        rgba(
+          243,
+          243,
+          241,
+          .34
+        );
+
+      animation:
+        propFloatB
+        7.6s
+        ease-in-out
+        -2s
+        infinite alternate;
+    }
+
+    .auto-layout-pill {
+      position: absolute;
+
+      right: 7%;
+      top: 42%;
+
+      padding:
+        7px 10px;
+
+      border-radius: 8px;
+
+      border:
+        1px solid
+        rgba(
+          243,
+          243,
+          241,
+          .09
+        );
+
+      background:
+        rgba(
+          243,
+          243,
+          241,
+          .05
+        );
+
+      color:
+        rgba(
+          243,
+          243,
+          241,
+          .40
+        );
+
+      font-size: 11px;
+
+      backdrop-filter:
+        blur(8px);
+
+      animation:
+        propFloatB
+        6.8s
+        ease-in-out
+        -3.2s
+        infinite alternate;
+    }
+
+    .component-chip {
+      position: absolute;
+
+      left: 12%;
+      bottom: 18%;
+
+      padding:
+        7px 10px;
+
+      border-radius: 8px;
+
+      border:
+        1px solid
+        rgba(
+          210,
+          210,
+          210,
+          .16
+        );
+
+      background:
+        rgba(
+          220,
+          220,
+          220,
+          .035
+        );
+
+      color:
+        rgba(
+          230,
+          230,
+          230,
+          .34
+        );
+
+      font-size: 11px;
+
+      animation:
+        propFloatC
+        7.2s
+        ease-in-out
+        -2.2s
+        infinite alternate;
+    }
+
+    .prototype-connector {
+      position: absolute;
+
+      right: 12%;
+      bottom: 18%;
+
+      width: 160px;
+      height: 70px;
+
+      opacity: .38;
+
+      animation:
+        propFloatC
+        7.8s
+        ease-in-out
+        -3.8s
+        infinite alternate;
+    }
+
+    .prototype-connector svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .cursor-prop {
+      position: absolute;
+
+      right: 22%;
+      top: 18%;
+
+      width: 18px;
+      height: 18px;
+
+      opacity: .5;
+
+      animation:
+        propFloatB
+        6.2s
+        ease-in-out
+        -1.4s
+        infinite alternate;
+    }
+
+
+    /* =========================
+       COMMON
+    ========================== */
+
+    .section {
+      padding: 94px 0;
+    }
+
+    .section-heading {
+      max-width: 780px;
+
+      margin:
+        0 auto 48px;
+
+      text-align: center;
+    }
+
+    .label {
+      margin-bottom: 13px;
+
+      font-size: 12px;
+
+      letter-spacing:
+        .09em;
+
+      text-transform:
+        uppercase;
+
+      color: var(--muted);
+    }
+
+    .section-title {
+      font-size:
+        clamp(
+          42px,
+          5vw,
+          68px
+        );
+
+      line-height: 1;
+
+      letter-spacing:
+        -.055em;
+
+      font-weight: 520;
+
+      text-wrap: balance;
+    }
+
+
+    /* =========================
+       WORK
+    ========================== */
+
+    .work {
+      padding-top: 86px;
+    }
+
+    .projects {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          3,
+          minmax(0, 1fr)
+        );
+
+      column-gap: 22px;
+
+      row-gap: 48px;
+    }
+
+    .project-cover {
+      aspect-ratio: 1.24 / 1;
+
+      overflow: hidden;
+
+      background:
+        var(--image)
+        center /
+        cover
+        no-repeat,
+        linear-gradient(
+          145deg,
+          #202020,
+          #111
+        );
+    }
+
+    .project-cover::after {
+      content: "";
+
+      display: block;
+
+      width: 100%;
+      height: 100%;
+
+      background:
+        rgba(0, 0, 0, 0);
+
+      transition:
+        background .4s ease;
+    }
+
+    .project:hover
+    .project-cover::after {
+      background:
+        rgba(0, 0, 0, .09);
+    }
+
+    .project-info {
+      padding-top: 14px;
+    }
+
+    .project-head {
+      display: flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        baseline;
+
+      gap: 16px;
+    }
+
+    .project-name {
+      font-size: 17px;
+
+      font-weight: 560;
+
+      letter-spacing:
+        -.025em;
+    }
+
+    .project-year,
+    .project-type {
+      color: var(--muted);
+    }
+
+    .project-year {
+      font-size: 12px;
+    }
+
+    .project-type {
+      margin-top: 5px;
+
+      font-size: 13px;
+    }
+
+    .project-view {
+      display: inline-block;
+
+      margin-top: 10px;
+
+      font-size: 13px;
+
+      color: var(--soft);
+
+      transition:
+        transform
+        .35s
+        var(--ease),
+        color
+        .25s ease;
+    }
+
+    .project:hover
+    .project-view {
+      color: var(--text);
+
+      transform:
+        translateX(3px);
+    }
+
+
+    /* =========================
+       HOW I THINK
+    ========================== */
+
+    .thinking {
+      padding-top: 108px;
+
+      background:
+        radial-gradient(
+          circle at 50% 20%,
+          rgba(
+            180,
+            180,
+            180,
+            .05
+          ),
+          transparent 31%
+        );
+    }
+
+    .thinking-grid {
+      width:
+        min(
+          1180px,
+          calc(100% - 36px)
+        );
+
+      margin:
+        56px auto 0;
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          3,
+          minmax(0, 1fr)
+        );
+
+      column-gap:
+        clamp(
+          64px,
+          6vw,
+          92px
+        );
+
+      row-gap: 42px;
+    }
+
+    .thought-number {
+      margin-bottom: 17px;
+
+      font-size: 12px;
+
+      color: var(--muted);
+    }
+
+    .thought h3 {
+      font-size: 24px;
+
+      line-height: 1.18;
+
+      letter-spacing:
+        -.04em;
+
+      font-weight: 540;
+    }
+
+    .thought p {
+      margin-top: 13px;
+
+      font-size: 14px;
+
+      line-height: 1.65;
+
+      color: var(--muted);
+    }
+
+
+    /* =========================
+       BEHIND WORK
+    ========================== */
+
+    .behind {
+      padding-top: 106px;
+    }
+
+    .behind-heading {
+      max-width: 900px;
+
+      margin: 0 auto;
+
+      text-align: center;
+    }
+
+    .behind-heading h2 {
+      font-size:
+        clamp(
+          48px,
+          6vw,
+          82px
+        );
+
+      line-height: .98;
+
+      letter-spacing:
+        -.06em;
+
+      font-weight: 520;
+
+      text-wrap: balance;
+    }
+
+    .behind-heading p {
+      max-width: 600px;
+
+      margin:
+        23px auto 0;
+
+      font-size: 15px;
+
+      line-height: 1.65;
+
+      color: var(--soft);
+    }
+
+    .process-grid {
+      margin-top: 54px;
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(12, 1fr);
+
+      gap: 18px;
+
+      align-items: start;
+    }
+
+    .process-image {
+      overflow: hidden;
+
+      background:
+        var(--image)
+        center /
+        cover
+        no-repeat,
+        linear-gradient(
+          140deg,
+          #202020,
+          #111
+        );
+    }
+
+    .process-one {
+      grid-column: 1 / 6;
+      height: 320px;
+    }
+
+    .process-two {
+      grid-column: 6 / 13;
+      height: 410px;
+    }
+
+    .process-three {
+      grid-column: 2 / 8;
+      height: 360px;
+    }
+
+    .process-four {
+      grid-column: 8 / 12;
+      height: 280px;
+    }
+
+
+    /* =========================
+       SERVICES
+    ========================== */
+
+    .capabilities {
+      padding:
+        112px 0 108px;
+    }
+
+    .capabilities-wrap {
+      max-width: 1180px;
+
+      margin: 0 auto;
+    }
+
+    .capabilities-intro {
+      max-width: 760px;
+
+      margin: 0 auto;
+
+      text-align: center;
+    }
+
+    .capabilities-copy {
+      max-width: 560px;
+
+      margin:
+        22px auto 0;
+
+      font-size: 15px;
+
+      line-height: 1.65;
+
+      color: var(--soft);
+    }
+
+    .capability-grid {
+      margin-top: 70px;
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          3,
+          minmax(0, 1fr)
+        );
+
+      gap:
+        48px 30px;
+    }
+
+
+    /* FIGMA CARDS */
+
+    .figma-frame {
+      position: relative;
+
+      min-height: 190px;
+
+      padding:
+        30px 28px 27px;
+
+      border:
+        1px dashed
+        rgba(
+          243,
+          243,
+          241,
+          .18
+        );
+
+      background:
+        rgba(
+          243,
+          243,
+          241,
+          .012
+        );
+
+      transition:
+        border-color .35s ease,
+        background .35s ease,
+        transform .4s var(--ease);
+    }
+
+    .figma-frame:hover {
+      border-color:
+        rgba(
+          243,
+          243,
+          241,
+          .34
+        );
+
+      background:
+        rgba(
+          243,
+          243,
+          241,
+          .024
+        );
+
+      transform:
+        translateY(-3px);
+    }
+
+    .figma-frame::before {
+      content:
+        attr(data-frame);
+
+      position: absolute;
+
+      top: -24px;
+      left: -1px;
+
+      font-size: 10px;
+
+      letter-spacing:
+        .04em;
+
+      color:
+        rgba(
+          243,
+          243,
+          241,
+          .28
+        );
+    }
+
+    .frame-handle {
+      position: absolute;
+
+      width: 7px;
+      height: 7px;
+
+      background:
+        rgba(
+          243,
+          243,
+          241,
+          .62
+        );
+    }
+
+    .frame-handle.tl {
+      top: -4px;
+      left: -4px;
+    }
+
+    .frame-handle.tr {
+      top: -4px;
+      right: -4px;
+    }
+
+    .frame-handle.bl {
+      bottom: -4px;
+      left: -4px;
+    }
+
+    .frame-handle.br {
+      bottom: -4px;
+      right: -4px;
+    }
+
+    .capability-number {
+      margin-bottom: 18px;
+
+      font-size: 11px;
+
+      color: var(--muted);
+    }
+
+    .figma-frame h3 {
+      font-size:
+        clamp(
+          25px,
+          2.3vw,
+          34px
+        );
+
+      line-height: 1.1;
+
+      letter-spacing:
+        -.045em;
+
+      font-weight: 540;
+    }
+
+    .figma-frame p {
+      max-width: 290px;
+
+      margin-top: 12px;
+
+      font-size: 13px;
+
+      line-height: 1.62;
+
+      color: var(--muted);
+    }
+
+    .frame-property {
+      position: absolute;
+
+      right: 18px;
+      bottom: 15px;
+
+      font-size: 9px;
+
+      letter-spacing:
+        .045em;
+
+      text-transform:
+        uppercase;
+
+      color:
+        rgba(
+          243,
+          243,
+          241,
+          .18
+        );
+    }
+
+    .industry-note {
+      max-width: 760px;
+
+      margin:
+        58px auto 0;
+
+      text-align: center;
+
+      font-size: 14px;
+
+      line-height: 1.7;
+
+      color: var(--muted);
+    }
+
+    .industry-note strong {
+      color: var(--soft);
+
+      font-weight: 500;
+    }
+
+
+    /* =========================
+       CONTACT
+    ========================== */
+
+    .contact {
+      padding:
+        114px 0 74px;
+
+      background:
+        radial-gradient(
+          circle at 50% 36%,
+          rgba(
+            180,
+            180,
+            180,
+            .055
+          ),
+          transparent 34%
+        );
+    }
+
+    .contact-heading {
+      max-width: 760px;
+
+      margin: 0 auto;
+
+      text-align: center;
+    }
+
+    .contact-heading h2 {
+      font-size:
+        clamp(
+          56px,
+          7vw,
+          96px
+        );
+
+      line-height: .98;
+
+      letter-spacing:
+        -.065em;
+
+      font-weight: 520;
+    }
+
+    .contact-heading p {
+      max-width: 590px;
+
+      margin:
+        23px auto 0;
+
+      font-size: 16px;
+
+      line-height: 1.62;
+
+      color: var(--soft);
+    }
+
+    .contact-form {
+      max-width: 760px;
+
+      margin:
+        48px auto 0;
+    }
+
+    .form-row {
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 32px;
+    }
+
+    .field {
+      margin-bottom: 30px;
+    }
+
+    .field label {
+      display: block;
+
+      margin-bottom: 9px;
+
+      font-size: 12px;
+
+      color: var(--muted);
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+
+      border: 0;
+
+      border-bottom:
+        1px solid
+        rgba(
+          243,
+          243,
+          241,
+          .15
+        );
+
+      outline: 0;
+
+      padding:
+        0 0 11px;
+
+      background:
+        transparent;
+
+      color: var(--text);
+
+      font-size: 15px;
+
+      transition:
+        border-color
+        .3s ease;
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+      border-color:
+        rgba(
+          243,
+          243,
+          241,
+          .5
+        );
+    }
+
+    .field textarea {
+      min-height: 88px;
+
+      resize: vertical;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color:
+        rgba(
+          243,
+          243,
+          241,
+          .22
+        );
+    }
+
+    .submit-row {
+      display: flex;
+
+      justify-content:
+        center;
+
+      margin-top: 5px;
+    }
+
+    .submit {
+      border: 0;
+
+      padding:
+        13px 21px;
+
+      border-radius: 7px;
+
+      background:
+        var(--cream);
+
+      color: #111;
+
+      font-size: 14px;
+
+      font-weight: 600;
+
+      cursor: pointer;
+
+      transition:
+        transform
+        .3s
+        var(--ease);
+    }
+
+    .submit:hover {
+      transform:
+        translateY(-2px);
+    }
+
+    .contact-links {
+      margin-top: 44px;
+
+      display: flex;
+
+      justify-content:
+        center;
+
+      flex-wrap: wrap;
+
+      gap: 25px;
+    }
+
+    .contact-links a {
+      font-size: 14px;
+
+      color: var(--muted);
+
+      transition:
+        color .25s ease;
+    }
+
+    .contact-links a:hover {
+      color: var(--text);
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    .footer {
+      padding:
+        28px 0 32px;
+    }
+
+    .footer-inner {
+      display: flex;
+
+      justify-content:
+        space-between;
+
+      font-size: 12px;
+
+      color:
+        rgba(
+          243,
+          243,
+          241,
+          .23
+        );
+    }
+
+
+    /* =========================
+       REVEALS
+    ========================== */
+
+    .reveal {
+      opacity: 0;
+
+      transform:
+        translateY(18px);
+
+      filter:
+        blur(4px);
+
+      transition:
+        opacity
+        .78s
+        var(--ease),
+
+        transform
+        .78s
+        var(--ease),
+
+        filter
+        .78s
+        var(--ease);
+
+      transition-delay:
+        var(--delay, 0ms);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+
+      transform:
+        translateY(0);
+
+      filter: blur(0);
+    }
+
+
+    /* =========================
+       ANIMATION
+    ========================== */
+
+    @keyframes pageOpen {
+      from {
+        opacity: 0;
+        filter: blur(5px);
+      }
+
+      to {
+        opacity: 1;
+        filter: blur(0);
+      }
+    }
+
+    @keyframes propsIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: .96;
+      }
+    }
+
+    @keyframes heroIn {
+      to {
+        opacity: 1;
+
+        transform:
+          translateY(0)
+          scale(1);
+      }
+    }
+
+    @keyframes titleIn {
+      to {
+        transform:
+          translateY(0);
+      }
+    }
+
+    @keyframes propFloatA {
+      0% {
+        transform:
+          translate3d(
+            0,
+            0,
+            0
+          );
+      }
+
+      35% {
+        transform:
+          translate3d(
+            10px,
+            -10px,
+            0
+          );
+      }
+
+      70% {
+        transform:
+          translate3d(
+            -8px,
+            -18px,
+            0
+          );
+      }
+
+      100% {
+        transform:
+          translate3d(
+            14px,
+            -8px,
+            0
+          );
+      }
+    }
+
+    @keyframes propFloatB {
+      0% {
+        transform:
+          translate3d(
+            0,
+            0,
+            0
+          );
+      }
+
+      35% {
+        transform:
+          translate3d(
+            14px,
+            8px,
+            0
+          );
+      }
+
+      70% {
+        transform:
+          translate3d(
+            4px,
+            18px,
+            0
+          );
+      }
+
+      100% {
+        transform:
+          translate3d(
+            18px,
+            -3px,
+            0
+          );
+      }
+    }
+
+    @keyframes propFloatC {
+      0% {
+        transform:
+          translate3d(
+            0,
+            0,
+            0
+          );
+      }
+
+      35% {
+        transform:
+          translate3d(
+            -12px,
+            -7px,
+            0
+          );
+      }
+
+      70% {
+        transform:
+          translate3d(
+            -18px,
+            8px,
+            0
+          );
+      }
+
+      100% {
+        transform:
+          translate3d(
+            -7px,
+            -15px,
+            0
+          );
+      }
+    }
+
+
+    /* =========================
+       TABLET
+    ========================== */
+
+    @media
+    (max-width: 1000px) {
+
+      :root {
+        --page:
+          min(
+            1100px,
+            calc(100% - 56px)
+          );
+      }
+
+      .projects {
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
+
+      .thinking-grid {
+        grid-template-columns:
+          1fr;
+
+        max-width: 620px;
+      }
+
+      .capability-grid {
+        grid-template-columns:
+          repeat(
+            2,
+            minmax(0, 1fr)
+          );
+      }
+
+      .process-one {
+        grid-column: 1 / 7;
+      }
+
+      .process-two {
+        grid-column: 7 / 13;
+      }
+
+      .process-three {
+        grid-column: 1 / 8;
+      }
+
+      .process-four {
+        grid-column: 8 / 13;
+      }
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media
+    (max-width: 680px) {
+
+      :root {
+        --page:
+          calc(100% - 36px);
+      }
+
+      .header {
+        padding: 20px 0;
+      }
+
+      .nav {
+        gap: 18px;
+      }
+
+      .nav a:nth-child(2) {
+        display: none;
+      }
+
+      .hero {
+        min-height: 92svh;
+
+        padding:
+          110px 0 66px;
+      }
+
+      .portrait-wrap {
+        width: 88px;
+        height: 88px;
+      }
+
+      .hero-title {
+        font-size:
+          clamp(
+            48px,
+            14vw,
+            66px
+          );
+      }
+
+      .hero-copy {
+        max-width: 350px;
+
+        font-size: 15px;
+      }
+
+      .selection-frame {
+        width: 44%;
+        height: 22%;
+
+        left: -14%;
+        top: 24%;
+      }
+
+      .frame-tag {
+        left: 3%;
+        top: 20%;
+      }
+
+      .dimension-label {
+        right: 3%;
+        top: 24%;
+      }
+
+      .auto-layout-pill {
+        right: -7%;
+        top: 38%;
+      }
+
+      .component-chip {
+        left: -2%;
+        bottom: 16%;
+      }
+
+      .prototype-connector {
+        right: -10%;
+        bottom: 15%;
+
+        width: 120px;
+      }
+
+      .cursor-prop {
+        display: none;
+      }
+
+      .section {
+        padding: 80px 0;
+      }
+
+      .projects {
+        grid-template-columns:
+          1fr;
+
+        row-gap: 40px;
+      }
+
+      .thinking-grid {
+        width: 100%;
+
+        grid-template-columns:
+          1fr;
+
+        row-gap: 40px;
+      }
+
+      .process-grid {
+        display: block;
+
+        margin-top: 42px;
+      }
+
+      .process-image {
+        height:
+          270px !important;
+
+        margin-bottom: 14px;
+      }
+
+      .capabilities {
+        padding:
+          92px 0;
+      }
+
+      .capability-grid {
+        margin-top: 58px;
+
+        grid-template-columns:
+          1fr;
+
+        gap: 46px;
+      }
+
+      .figma-frame {
+        min-height: 176px;
+
+        padding:
+          27px 24px 25px;
+      }
+
+      .form-row {
+        grid-template-columns:
+          1fr;
+
+        gap: 0;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 7px;
+
+        text-align: center;
+      }
+    }
+
+
+    @media
+    (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation:
+          none !important;
+
+        transition:
+          none !important;
+      }
+
+      body,
+      .design-props {
+        opacity: 1;
+      }
+
+      .reveal {
+        opacity: 1;
+
+        transform: none;
+
+        filter: none;
+      }
+
+      .hero-title
+      .line span {
+        transform: none;
+      }
+
+      .portrait-wrap,
+      .hero-meta,
+      .hero-copy,
+      .hero-link {
+        opacity: 1;
+
+        transform: none;
+      }
+    }
+  </style>
 </head>
 
-<body class="index-page">
 
-  <header id="header" class="header d-flex flex-column justify-content-center">
+<body>
 
-    <i class="header-toggle d-xl-none bi bi-list"></i>
+  <!-- HEADER -->
 
-    <nav id="navmenu" class="navmenu">
-      <ul>
-        <li><a href="#hero" class="active"><i class="bi bi-house navicon"></i><span>Home</span></a></li>
-        <li><a href="#about"><i class="bi bi-person navicon"></i><span>About</span></a></li>
-        <li><a href="#services"><i class="bi bi-hdd-stack navicon"></i><span>Services</span></a></li>
-        <li><a href="#portfolio"><i class="bi bi-images navicon"></i><span>Portfolio</span></a></li>
-        <li><a href="#contact"><i class="bi bi-envelope navicon"></i><span>Contact</span></a></li>
-      </ul>
-    </nav>
+  <header
+    class="header"
+    id="header"
+  >
+
+    <div
+      class="
+        container
+        header-inner
+      "
+    >
+
+      <a
+        class="brand"
+        href="#top"
+      >
+        Yojana Adhikari
+      </a>
+
+
+      <nav class="nav">
+
+        <a href="#work">
+          Work
+        </a>
+
+        <a href="#thinking">
+          Thinking
+        </a>
+
+        <a href="#contact">
+          Contact
+        </a>
+
+      </nav>
+
+    </div>
 
   </header>
 
-  <main class="main">
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero section light-background">
 
-      <img src="assets/img/hero-bg.jpg" alt="">
+  <main id="top">
 
-      <div class="container" data-aos="zoom-out">
-        <div class="row justify-content-center">
-          <div class="col-lg-9">
-            <h2>Yojana Adhikari</h2>
-            <p>I'm <span class="typed" data-typed-items="Designer, Visual Storyteller, an Artist">Designer</span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></p>
-            <div class="social-links">
-              <a href="https://www.linkedin.com/in/yojana-adhikari-95b56b2a7/" class="bi bi-linkedin" target="_blank" rel="noopener noreferrer"></a>
-        <a href="https://github.com/yojanaadhikari" class="bi bi-github" target="_blank" rel="noopener noreferrer"></a>
-        <a href="https://www.facebook.com/yojana.adhikari.1420" class="bi bi-facebook" target="_blank" rel="noopener noreferrer"></a>
 
-             <!-- <a href="#"><i class="bi bi-instagram"></i></a>-->
-            </div>
-          </div>
-        </div>
-      </div>
+    <!-- HERO -->
 
-    </section><!-- /Hero Section -->
+    <section class="hero">
 
-    <!-- About Section -->
-    <section id="about" class="about section">
 
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>About</h2>
-        <p>Driven by passion and creativity, I transform ideas into intuitive digital experiences. I solve complex challenges, blending aesthetics with functionality to deliver user-centered solutions. Committed to learning, I embrace innovation to craft meaningful, lasting interactions.</p>
-      </div><!-- End Section Title -->
+      <!-- FIGMA PROPS -->
 
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
+      <div
+        class="design-props"
+        aria-hidden="true"
+      >
 
-        <div class="row gy-4 justify-content-center">
-          <div class="col-lg-4">
-            <img src="assets/img/profile-img.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="col-lg-8 content">
-            <h2>UI/UX Designer</h2>
-            <br>
-            <br>
-            <br>
-            <p class="fst-italic py-3">
-              Passionate UI/UX designer crafting intuitive experiences that balance aesthetics and functionality for impactful solutions.
-            </p>
-            
-            <p class="py-3">
-              I am a dedicated UI/UX designer focused on creating user-centered designs that blend beauty with functionality. My portfolio highlights a variety of projects where I transform ideas into seamless digital experiences, showcasing my commitment to innovation and user satisfaction.
-            </p>
-          </div>
+        <div class="selection-frame">
+
+          <span class="handle tl"></span>
+          <span class="handle tr"></span>
+          <span class="handle bl"></span>
+          <span class="handle br"></span>
+          <span class="handle tm"></span>
+          <span class="handle bm"></span>
+
         </div>
 
-      </div>
 
-    </section><!-- /About Section -->
-
-
-   
-
-    <!-- Services Section -->
-    <section id="services" class="services section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Services</h2>
-        <p>I offer a comprehensive range of UI/UX design services, including user research, wireframing, and prototyping. I create intuitive information architectures and visually engaging designs, focusing on interaction and usability testing to ensure optimal user experiences. Let's bring your vision to life!</p>
-      </div><!-- End Section Title -->
-      <div class="container">
-        <div class="row gy-4">
-      
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="service-item item-cyan position-relative">
-              <div class="icon">
-                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke="none" stroke-width="0" fill="#f5f5f5" 
-                    d="M300,521.0016835830174C376.1290562159157,517.8887921683347,466.0731472004068,529.7835943286574,..."></path>
-                </svg>
-                <i class="bi bi-search"></i> <!-- Updated: Magnifying glass for 'Research' -->
-              </div>
-              <h3>User Research & Analysis</h3> <!-- Removed <a> tag -->
-              <p>Gather user insights through research to design products that meet real needs and expectations.</p>
-            </div>
-          </div>
-      
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="service-item item-orange position-relative">
-              <div class="icon">
-                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke="none" stroke-width="0" fill="#f5f5f5" 
-                    d="M300,582.0697525312426C382.5290701553225,586.8405444964366,..."></path>
-                </svg>
-                <i class="bi bi-vector-pen"></i> <!-- Updated: Pen for 'Wireframing & Prototyping' -->
-              </div>
-              <h3>Wireframing & Prototyping</h3> <!-- Removed <a> tag -->
-              <p>Create wireframes and prototypes to visualize layouts and test workflows early on.</p>
-            </div>
-          </div>
-      
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="service-item item-teal position-relative">
-              <div class="icon">
-                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke="none" stroke-width="0" fill="#f5f5f5" 
-                    d="M300,541.5067337569781C382.14930387511276,545.0595476570109,..."></path>
-                </svg>
-                <i class="bi bi-diagram-3"></i> <!-- Updated: Diagram for 'Information Architecture' -->
-              </div>
-              <h3>Information Architecture (IA)</h3> <!-- Removed <a> tag -->
-              <p>Organize content logically, ensuring easy navigation and smooth user journeys.</p>
-            </div>
-          </div>
-      
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="service-item item-red position-relative">
-              <div class="icon">
-                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke="none" stroke-width="0" fill="#f5f5f5" 
-                    d="M300,503.46388370962813C374.79870501325706,506.71871716319447,..."></path>
-                </svg>
-                <i class="bi bi-palette"></i> <!-- Updated: Palette for 'Visual Design & Branding' -->
-              </div>
-              <h3>Visual Design & Branding</h3> <!-- Removed <a> tag -->
-              <p>Design visually appealing interfaces aligned with brand identity for user engagement.</p>
-            </div>
-          </div>
-      
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-            <div class="service-item item-indigo position-relative">
-              <div class="icon">
-                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke="none" stroke-width="0" fill="#f5f5f5" 
-                    d="M300,532.3542879108572C369.38199826031484,532.3153073249985,..."></path>
-                </svg>
-                <i class="bi bi-arrow-repeat"></i> <!-- Updated: Arrows for 'Interaction Design' -->
-              </div>
-              <h3>Interaction Design (IxD)</h3> <!-- Removed <a> tag -->
-              <p>Design smooth interactions with animations and feedback for intuitive experiences.</p>
-            </div>
-          </div>
-      
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-            <div class="service-item item-pink position-relative">
-              <div class="icon">
-                <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke="none" stroke-width="0" fill="#f5f5f5" 
-                    d="M300,566.797414625762C385.7384707136149,576.1784315230908,..."></path>
-                </svg>
-                <i class="bi bi-bar-chart-line"></i> <!-- Updated: Chart for 'Usability Testing' -->
-              </div>
-              <h3>Usability Testing & Iteration</h3> <!-- Removed <a> tag -->
-              <p>Test with users, gather feedback, and refine the design for optimal usability.</p>
-            </div>
-          </div>
-      
+        <div class="frame-tag">
+          Frame / Desktop
         </div>
-      </div>
-      
-      <!-- End Service Item -->
+
+
+        <div class="dimension-label">
+          1440 × 1024
+        </div>
+
+
+        <div class="auto-layout-pill">
+          Auto layout
+        </div>
+
+
+        <div class="component-chip">
+          Component / Primary
+        </div>
+
+
+        <div class="prototype-connector">
+
+          <svg
+            viewBox="0 0 160 70"
+            fill="none"
+          >
+
+            <path
+              d="
+                M6 52
+                C34 52
+                46 18
+                81 18
+                C111 18
+                117 42
+                151 42
+              "
+              stroke="
+                rgba(
+                  243,
+                  243,
+                  241,
+                  .45
+                )
+              "
+              stroke-width="1.2"
+              stroke-dasharray="5 6"
+            />
+
+            <circle
+              cx="6"
+              cy="52"
+              r="4"
+              fill="
+                rgba(
+                  243,
+                  243,
+                  241,
+                  .5
+                )
+              "
+            />
+
+            <circle
+              cx="151"
+              cy="42"
+              r="4"
+              fill="
+                rgba(
+                  243,
+                  243,
+                  241,
+                  .5
+                )
+              "
+            />
+
+          </svg>
+
+        </div>
+
+
+        <div class="cursor-prop">
+
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+
+            <path
+              d="
+                M4 3
+                L18.8 12.7
+                L12.1 14.1
+                L8.6 20.1
+                L4 3Z
+              "
+              fill="
+                rgba(
+                  243,
+                  243,
+                  241,
+                  .55
+                )
+              "
+            />
+
+          </svg>
 
         </div>
 
       </div>
 
-    </section><!-- /Services Section -->
 
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Portfolio</h2>
-        <p>Passionate about delivering user-centric designs with a perfect blend of creativity and functionality. Driven to solve challenges, explore innovative ideas, and create impactful digital experiences. I approach every project with dedication, ensuring attention to detail and a focus on seamless usability.</p>
-      </div><!-- End Section Title -->
 
       <div class="container">
 
-        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+        <div class="hero-content">
 
-          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                <a href="https://github.com/yojanaadhikari/Figma-Projects/blob/main/BookGo.md" class="portfolio-link" target="_blank" title="Open link in new tab">
-                    <img src="assets/img/masonry-portfolio/masonry-portfolio-1.jpg" class="img-fluid" alt="">
-                </a>
-                <div class="portfolio-info">
-                    <h4>BookGo</h4>
-                    <p>Hotel Booking App</p>
-                    <a href="assets/img/masonry-portfolio/masonry-portfolio-1.jpg" title="App 1" class="glightbox preview-link">
-                        <i class="bi bi-zoom-in"></i>
-                    </a>
-                    <a href="https://github.com/yojanaadhikari/Figma-Projects/blob/main/BookGo.md" title="CopyToClipboard" class="details-link" onclick="copyToClipboard(event, 'https://github.com/yojanaadhikari/Figma-Projects/blob/main/BookGo.md')">
-                        <i class="bi bi-clipboard"></i>
-                    </a>
-                </div>
-            </div><!-- End Portfolio Item -->
-        
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-                <a href="https://github.com/yojanaadhikari/Figma-Projects/blob/main/PICKAPUPPY.md" class="portfolio-link" target="_blank" title="Open link in new tab">
-                    <img src="assets/img/masonry-portfolio/masonry-portfolio-2.jpg" class="img-fluid" alt="">
-                </a>
-                <div class="portfolio-info">
-                    <h4>PICKAPUPPY</h4>
-                    <p>Pet Adoption Website</p>
-                    <a href="assets/img/masonry-portfolio/masonry-portfolio-2.jpg" title="Product 1" class="glightbox preview-link">
-                        <i class="bi bi-zoom-in"></i>
-                    </a>
-                    <a href="https://github.com/yojanaadhikari/Figma-Projects/blob/main/PICKAPUPPY.md" title="CopyToClipboard" class="details-link" onclick="copyToClipboard(event, 'https://github.com/yojanaadhikari/Figma-Projects/blob/main/PICKAPUPPY.md')">
-                        <i class="bi bi-clipboard"></i>
-                    </a>
-                </div>
-            </div><!-- End Portfolio Item -->
-        
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-              <a href="https://github.com/yojanaadhikari/Figma-Projects/blob/main/Aura.md" class="portfolio-link" target="_blank" title="Open link in new tab"> 
-              <img src="assets/img/masonry-portfolio/masonry-portfolio-3.jpg" class="img-fluid" alt=""></a> 
-                <div class="portfolio-info">
-                    <h4>Aura</h4>
-                    <p>Fashion Blog Website</p>
-                    <a href="assets/img/masonry-portfolio/masonry-portfolio-3.jpg" title="Branding 1" data-gallery="portfolio-gallery-branding" class="glightbox preview-link">
-                        <i class="bi bi-zoom-in"></i>
-                    </a>
-                    <a href="https://github.com/yojanaadhikari/Figma-Projects/blob/main/Aura.md" title="CopyToClipboard" class="details-link" onclick="copyToClipboard(event, 'https://github.com/yojanaadhikari/Figma-Projects/blob/main/Aura.md')">
-                        <i class="bi bi-clipboard"></i>
-                    </a>
-                </div>
-            </div><!-- End Portfolio Item -->
-        
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <a href="https://github.com/yojanaadhikari/Figma-Projects/blob/main/Eatsy.md" class="portfolio-link" target="_blank" title="Open link in new tab">   
-              <img src="assets/img/masonry-portfolio/masonry-portfolio-4.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                    <h4>Eatsy</h4>
-                    <p>Korean, Japanese Restaurant Website</p>
-                    <a href="assets/img/masonry-portfolio/masonry-portfolio-4.jpg" title="App 2" data-gallery="portfolio-gallery-app" class="glightbox preview-link">
-                        <i class="bi bi-zoom-in"></i>
-                    </a>
-                    <a href="https://github.com/yojanaadhikari/Figma-Projects/blob/main/Eatsy.md" title="CopyToClipboard" class="details-link" onclick="copyToClipboard(event, 'https://github.com/yojanaadhikari/Figma-Projects/blob/main/Eatsy.md')">
-                        <i class="bi bi-clipboard"></i>
-                    </a>
-                </div>
-            </div><!-- End Portfolio Item -->
-        
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <a href="https://github.com/yojanaadhikari/Figma-Projects/blob/main/Nurture.md" class="portfolio-link" target="_blank" title="Open link in new tab">   
-                <img src="assets/img/masonry-portfolio/masonry-portfolio-5.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                    <h4>Nurture</h4>
-                    <p>Plant Care Assistant App</p>
-                    <a href="assets/img/masonry-portfolio/masonry-portfolio-5.jpg" title="Product 2" data-gallery="portfolio-gallery-product" class="glightbox preview-link">
-                        <i class="bi bi-zoom-in"></i>
-                    </a>
-                    <a href="https://github.com/yojanaadhikari/Figma-Projects/blob/main/Nurture.md" title="CopyToClipboard" class="details-link" onclick="copyToClipboard(event, 'https://github.com/yojanaadhikari/Figma-Projects/blob/main/Nurture.md')">
-                        <i class="bi bi-clipboard"></i>
-                    </a>
-                </div>
-            </div><!-- End Portfolio Item -->
-        
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-              <a href="https://github.com/yojanaadhikari/Figma-Projects/blob/main/INCURE.md" class="portfolio-link" target="_blank" title="Open link in new tab">   
-                <img src="assets/img/masonry-portfolio/masonry-portfolio-6.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                    <h4>INCURE</h4>
-                    <p>Appointment Booking App</p>
-                    <a href="assets/img/masonry-portfolio/masonry-portfolio-6.jpg" title="Branding 2" data-gallery="portfolio-gallery-branding" class="glightbox preview-link">
-                        <i class="bi bi-zoom-in"></i>
-                    </a>
-                    <a href="https://github.com/yojanaadhikari/Figma-Projects/blob/main/INCURE.md" title="CopyToClipboard" class="details-link" onclick="copyToClipboard(event, 'https://github.com/yojanaadhikari/Figma-Projects/blob/main/INCURE.md')">
-                        <i class="bi bi-clipboard"></i>
-                    </a>
-                </div>
-            </div><!-- End Portfolio Item -->
-        
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <a href="https://github.com/yojanaadhikari/Figma-Projects/blob/main/STEPPE.md" class="portfolio-link" target="_blank" title="Open link in new tab">   
-                <img src="assets/img/masonry-portfolio/masonry-portfolio-7.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                    <h4>STEPPE</h4>
-                    <p>Online Shoe Shop</p>
-                    <a href="assets/img/masonry-portfolio/masonry-portfolio-7.jpg" title="App 3" data-gallery="portfolio-gallery-app" class="glightbox preview-link">
-                        <i class="bi bi-zoom-in"></i>
-                    </a>
-                    <a href="https://github.com/yojanaadhikari/Figma-Projects/blob/main/STEPPE.md" title="CopyToClipboard" class="details-link" onclick="copyToClipboard(event, 'https://github.com/yojanaadhikari/Figma-Projects/blob/main/STEPPE.md')">
-                        <i class="bi bi-clipboard"></i>
-                    </a>
-                </div>
-            </div><!-- End Portfolio Item -->
-            <script>
-                function copyToClipboard(event, text) {
-                    event.preventDefault(); // Prevent the default anchor click behavior
-                    navigator.clipboard.writeText(text).then(function() {
-                        alert('Copied to clipboard: ' + text);
-                    }, function(err) {
-                        console.error('Could not copy text: ', err);
-                    });
-                }
-            </script>
-        
-        </div><!-- End Portfolio Container -->
-        
+          <!--
+          Replace this src with:
+          assets/yojana.jpg
 
-        </div>
+          once you upload your portrait
+          into GitHub assets.
+          -->
 
-      </div>
+          <div class="portrait-wrap">
 
-    </section><!-- /Portfolio Section -->
-
-    
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Contact</h2>
-        <p>Feel free to reach out for inquiries, collaborations, or feedback!</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade" data-aos-delay="100">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-4">
-            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
-              <i class="bi bi-geo-alt flex-shrink-0"></i>
-              <div>
-                <h3>Address</h3>
-                <p>Lalitpur, Nepal</p>
-              </div>
-            </div><!-- End Info Item -->
-
-            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
-              <i class="bi bi-envelope flex-shrink-0"></i>
-              <div>
-                <script>
-                  function copyEmail() {
-                      const email = 'yojanaadhikari27@gmail.com';
-                      // Create a temporary input element to hold the email address
-                      const tempInput = document.createElement('input');
-                      tempInput.value = email;
-                      document.body.appendChild(tempInput);
-                      tempInput.select();
-                      document.execCommand('copy');
-                      document.body.removeChild(tempInput);
-          
-                      // Optionally, show a confirmation alert
-                      alert('Email copied to clipboard!');
-                  }
-              </script>
-              <style>
-                  /* Optional: Add some styling for better UX */
-                  .copyable {
-                      cursor: pointer;
-                      user-select: none;
-                  }
-              </style>
-              <style>
-                  /* Optional: Add some styling for better UX */
-                  .copyable {
-                      cursor: pointer;
-                      user-select: none;
-                  }
-              </style>
-                <h3>Email</h3>
-                <p id="email-address" title="CopyToClipboard" class="copyable" onclick="copyEmail()">yojanaadhikari27@gmail.com </p>
-              </div>
-            </div><!-- End Info Item -->
+            <img
+              src="https://github.com/yojanaadhikari.png"
+              alt="Yojana Adhikari"
+            >
 
           </div>
 
-          <div class="col-lg-8">
-            <form id="my-form" action="https://formspree.io/f/movqaelj" method="POST" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
-                <div class="row gy-4">
-                    <div class="col-md-6">
-                        <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
-                    </div>
-        
-                    <div class="col-md-6 ">
-                        <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
-                    </div>
-        
-                    <div class="col-md-12">
-                        <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
-                    </div>
-        
-                    <div class="col-md-12">
-                        <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
-                    </div>
-        
-                    <div class="col-md-12 text-center">
-                        <div class="loading" style="display:none;">Loading...</div>
-                        <div class="error-message" style="color:white; background-color:red; padding: 15px; border-radius: 5px; display:none;"></div>
-                        <div class="sent-message" style="color:white; background-color:green; padding: 15px; border-radius: 5px; display:none;">Your message has been sent. Thank you!</div>
-        
-                        <button type="submit">Send Message</button>
-                    </div>
-                </div>
-            </form>
-        
-            <!-- Place this script at the end of the body tag -->
-            <script>
-                var form = document.getElementById("my-form");
-                var loadingMessage = document.querySelector(".loading");
-                var sentMessage = document.querySelector(".sent-message");
-                var errorMessage = document.querySelector(".error-message");
-        
-                async function handleSubmit(event) {
-                    event.preventDefault(); // Prevent default form submission
-                    loadingMessage.style.display = 'block'; // Show loading message
-                    sentMessage.style.display = 'none'; // Hide success message
-                    errorMessage.style.display = 'none'; // Hide error message
-        
-                    var data = new FormData(event.target);
-                    fetch(event.target.action, {
-                        method: form.method,
-                        body: data,
-                        headers: {
-                            'Accept': 'application/json'
-                        }
-                    }).then(response => {
-                        loadingMessage.style.display = 'none'; // Hide loading message
-                        if (response.ok) {
-                            sentMessage.style.display = 'block'; // Show success message
-                            form.reset(); // Clear the form
-                        } else {
-                            response.json().then(data => {
-                                if (Object.hasOwn(data, 'errors')) {
-                                    errorMessage.innerHTML = data["errors"].map(error => error["message"]).join(", ");
-                                } else {
-                                    errorMessage.innerHTML = "Oops! There was a problem submitting your form. Please check your internet connection.";
-                                }
-                                errorMessage.style.display = 'block'; // Show error message
-                            });
-                        }
-                    }).catch(error => {
-                        loadingMessage.style.display = 'none'; // Hide loading message
-                        errorMessage.innerHTML = "Oops! There was a problem submitting your form. Please check your internet connection.";
-                        errorMessage.style.display = 'block'; // Show error message
-                    });
-                }
-        
-                form.addEventListener("submit", handleSubmit);
-            </script>
-        </div>
-        
-        <!-- End Contact Form -->
+
+          <p class="hero-meta">
+            Yojana Adhikari · UI/UX & Product Designer
+          </p>
+
+
+          <h1 class="hero-title">
+
+            <span class="line">
+
+              <span>
+                I turn product friction
+              </span>
+
+            </span>
+
+
+            <span class="line">
+
+              <span>
+                into flows that feel obvious.
+              </span>
+
+            </span>
+
+          </h1>
+
+
+          <p class="hero-copy">
+
+            I simplify tangled requirements,
+            awkward flows and dense interfaces
+            into products people can understand,
+            use and move through naturally.
+
+          </p>
+
+
+          <a
+            class="hero-link"
+            href="#services"
+          >
+
+            <span>
+              What I can do for you
+            </span>
+
+          </a>
+
 
         </div>
 
       </div>
 
-    </section><!-- /Contact Section -->
+    </section>
+
+
+
+    <!-- MY WORK -->
+
+    <section
+      class="
+        section
+        work
+      "
+      id="work"
+    >
+
+      <div class="container">
+
+
+        <div
+          class="
+            section-heading
+            reveal
+          "
+        >
+
+          <p class="label">
+            My work
+          </p>
+
+          <h2 class="section-title">
+            Products I’ve helped shape.
+          </h2>
+
+        </div>
+
+
+
+        <div class="projects">
+
+
+          <a
+            class="
+              project
+              reveal
+            "
+            href="YOUR-BEHANCE-LINK"
+            target="_blank"
+          >
+
+            <div
+              class="project-cover"
+              style="
+                --image:
+                url('assets/luxe-project.jpg');
+              "
+            ></div>
+
+            <div class="project-info">
+
+              <div class="project-head">
+
+                <h3 class="project-name">
+                  LUXE
+                </h3>
+
+                <span class="project-year">
+                  2026
+                </span>
+
+              </div>
+
+              <p class="project-type">
+                E-commerce · Web & Mobile
+              </p>
+
+              <span class="project-view">
+                View project
+              </span>
+
+            </div>
+
+          </a>
+
+
+
+          <a
+            class="
+              project
+              reveal
+            "
+            href="YOUR-BEHANCE-LINK"
+            target="_blank"
+          >
+
+            <div
+              class="project-cover"
+              style="
+                --image:
+                url('assets/coachhq-project.jpg');
+              "
+            ></div>
+
+            <div class="project-info">
+
+              <div class="project-head">
+
+                <h3 class="project-name">
+                  CoachHQ
+                </h3>
+
+                <span class="project-year">
+                  2026
+                </span>
+
+              </div>
+
+              <p class="project-type">
+                Sports · Mobile Product
+              </p>
+
+              <span class="project-view">
+                View project
+              </span>
+
+            </div>
+
+          </a>
+
+
+
+          <a
+            class="
+              project
+              reveal
+            "
+            href="YOUR-BEHANCE-LINK"
+            target="_blank"
+          >
+
+            <div
+              class="project-cover"
+              style="
+                --image:
+                url('assets/paradise-hills.jpg');
+              "
+            ></div>
+
+            <div class="project-info">
+
+              <div class="project-head">
+
+                <h3 class="project-name">
+                  Paradise Hills
+                </h3>
+
+                <span class="project-year">
+                  2026
+                </span>
+
+              </div>
+
+              <p class="project-type">
+                Hospitality · Web Experience
+              </p>
+
+              <span class="project-view">
+                View project
+              </span>
+
+            </div>
+
+          </a>
+
+
+
+          <a
+            class="
+              project
+              reveal
+            "
+            href="YOUR-BEHANCE-LINK"
+            target="_blank"
+          >
+
+            <div
+              class="project-cover"
+              style="
+                --image:
+                url('assets/pharmathesia.jpg');
+              "
+            ></div>
+
+            <div class="project-info">
+
+              <div class="project-head">
+
+                <h3 class="project-name">
+                  Pharmathesia
+                </h3>
+
+                <span class="project-year">
+                  2026
+                </span>
+
+              </div>
+
+              <p class="project-type">
+                Healthcare · Product Design
+              </p>
+
+              <span class="project-view">
+                View project
+              </span>
+
+            </div>
+
+          </a>
+
+
+
+          <a
+            class="
+              project
+              reveal
+            "
+            href="YOUR-BEHANCE-LINK"
+            target="_blank"
+          >
+
+            <div
+              class="project-cover"
+              style="
+                --image:
+                url('assets/plexbit.jpg');
+              "
+            ></div>
+
+            <div class="project-info">
+
+              <div class="project-head">
+
+                <h3 class="project-name">
+                  Plex Bit
+                </h3>
+
+                <span class="project-year">
+                  2026
+                </span>
+
+              </div>
+
+              <p class="project-type">
+                Technology · Website
+              </p>
+
+              <span class="project-view">
+                View project
+              </span>
+
+            </div>
+
+          </a>
+
+
+
+          <a
+            class="
+              project
+              reveal
+            "
+            href="YOUR-BEHANCE-LINK"
+            target="_blank"
+          >
+
+            <div
+              class="project-cover"
+              style="
+                --image:
+                url('assets/aurora.jpg');
+              "
+            ></div>
+
+            <div class="project-info">
+
+              <div class="project-head">
+
+                <h3 class="project-name">
+                  Aurora
+                </h3>
+
+                <span class="project-year">
+                  2026
+                </span>
+
+              </div>
+
+              <p class="project-type">
+                Wellness · Web & Mobile
+              </p>
+
+              <span class="project-view">
+                View project
+              </span>
+
+            </div>
+
+          </a>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- HOW I THINK -->
+
+    <section
+      class="
+        section
+        thinking
+      "
+      id="thinking"
+    >
+
+      <div class="container">
+
+
+        <div
+          class="
+            section-heading
+            reveal
+          "
+        >
+
+          <p class="label">
+            How I think
+          </p>
+
+          <h2 class="section-title">
+            I don’t start with screens.
+          </h2>
+
+        </div>
+
+
+
+        <div class="thinking-grid">
+
+
+          <article
+            class="
+              thought
+              reveal
+            "
+          >
+
+            <div class="thought-number">
+              01
+            </div>
+
+            <h3>
+              Understand what actually needs solving.
+            </h3>
+
+            <p>
+
+              I look at the user problem,
+              the business goal and the
+              friction between them before
+              deciding what the interface
+              should become.
+
+            </p>
+
+          </article>
+
+
+
+          <article
+            class="
+              thought
+              reveal
+            "
+          >
+
+            <div class="thought-number">
+              02
+            </div>
+
+            <h3>
+              Make complexity feel simple.
+            </h3>
+
+            <p>
+
+              Clear hierarchy,
+              thoughtful interaction
+              and better flows should
+              make complex products
+              feel natural.
+
+            </p>
+
+          </article>
+
+
+
+          <article
+            class="
+              thought
+              reveal
+            "
+          >
+
+            <div class="thought-number">
+              03
+            </div>
+
+            <h3>
+              Design beyond the perfect screen.
+            </h3>
+
+            <p>
+
+              Responsive behaviour,
+              edge cases, states,
+              components and development
+              realities are part of
+              the design from the beginning.
+
+            </p>
+
+          </article>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- BEHIND THE WORK -->
+
+    <section
+      class="
+        section
+        behind
+      "
+    >
+
+      <div class="container">
+
+
+        <div
+          class="
+            behind-heading
+            reveal
+          "
+        >
+
+          <p class="label">
+            Behind the work
+          </p>
+
+
+          <h2>
+            Pretty screens are only
+            the final 10%.
+          </h2>
+
+
+          <p>
+
+            Before the polished interface,
+            there are flows, wireframes,
+            iterations, components,
+            responsive decisions and plenty
+            of ideas that never make it
+            into the final product.
+
+          </p>
+
+        </div>
+
+
+
+        <div class="process-grid">
+
+          <div
+            class="
+              process-image
+              process-one
+              reveal
+            "
+            style="
+              --image:
+              url('assets/process-wireframes.jpg');
+            "
+          ></div>
+
+
+          <div
+            class="
+              process-image
+              process-two
+              reveal
+            "
+            style="
+              --image:
+              url('assets/process-flows.jpg');
+            "
+          ></div>
+
+
+          <div
+            class="
+              process-image
+              process-three
+              reveal
+            "
+            style="
+              --image:
+              url('assets/process-components.jpg');
+            "
+          ></div>
+
+
+          <div
+            class="
+              process-image
+              process-four
+              reveal
+            "
+            style="
+              --image:
+              url('assets/process-responsive.jpg');
+            "
+          ></div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- WHAT I CAN DO -->
+
+    <section
+      class="capabilities"
+      id="services"
+    >
+
+      <div
+        class="
+          container
+          capabilities-wrap
+        "
+      >
+
+
+        <div
+          class="
+            capabilities-intro
+            reveal
+          "
+        >
+
+          <p class="label">
+            What I work on
+          </p>
+
+          <h2 class="section-title">
+            What can I help you design?
+          </h2>
+
+
+          <p class="capabilities-copy">
+
+            From early product thinking
+            to the final responsive interface,
+            I work across the parts that shape
+            how a product looks, behaves
+            and makes sense.
+
+          </p>
+
+        </div>
+
+
+
+        <div class="capability-grid">
+
+
+          <article
+            class="
+              figma-frame
+              reveal
+            "
+            data-frame="Frame 01"
+          >
+
+            <span class="frame-handle tl"></span>
+            <span class="frame-handle tr"></span>
+            <span class="frame-handle bl"></span>
+            <span class="frame-handle br"></span>
+
+            <div class="capability-number">
+              01
+            </div>
+
+            <h3>
+              Websites
+            </h3>
+
+            <p>
+
+              Clear structure,
+              strong visual direction
+              and responsive behaviour.
+
+            </p>
+
+            <span class="frame-property">
+              1440 · Auto layout
+            </span>
+
+          </article>
+
+
+
+          <article
+            class="
+              figma-frame
+              reveal
+            "
+            data-frame="Frame 02"
+          >
+
+            <span class="frame-handle tl"></span>
+            <span class="frame-handle tr"></span>
+            <span class="frame-handle bl"></span>
+            <span class="frame-handle br"></span>
+
+            <div class="capability-number">
+              02
+            </div>
+
+            <h3>
+              Mobile apps
+            </h3>
+
+            <p>
+
+              Real flows,
+              real states and interaction
+              designed around mobile behaviour.
+
+            </p>
+
+            <span class="frame-property">
+              390 · Prototype
+            </span>
+
+          </article>
+
+
+
+          <article
+            class="
+              figma-frame
+              reveal
+            "
+            data-frame="Frame 03"
+          >
+
+            <span class="frame-handle tl"></span>
+            <span class="frame-handle tr"></span>
+            <span class="frame-handle bl"></span>
+            <span class="frame-handle br"></span>
+
+            <div class="capability-number">
+              03
+            </div>
+
+            <h3>
+              Digital products
+            </h3>
+
+            <p>
+
+              Complex workflows shaped
+              into interfaces people
+              can understand quickly.
+
+            </p>
+
+            <span class="frame-property">
+              Flow · Variables
+            </span>
+
+          </article>
+
+
+
+          <article
+            class="
+              figma-frame
+              reveal
+            "
+            data-frame="Frame 04"
+          >
+
+            <span class="frame-handle tl"></span>
+            <span class="frame-handle tr"></span>
+            <span class="frame-handle bl"></span>
+            <span class="frame-handle br"></span>
+
+            <div class="capability-number">
+              04
+            </div>
+
+            <h3>
+              Design systems
+            </h3>
+
+            <p>
+
+              Reusable foundations
+              that keep products coherent
+              as they grow.
+
+            </p>
+
+            <span class="frame-property">
+              Component · Variant
+            </span>
+
+          </article>
+
+
+
+          <article
+            class="
+              figma-frame
+              reveal
+            "
+            data-frame="Frame 05"
+          >
+
+            <span class="frame-handle tl"></span>
+            <span class="frame-handle tr"></span>
+            <span class="frame-handle bl"></span>
+            <span class="frame-handle br"></span>
+
+            <div class="capability-number">
+              05
+            </div>
+
+            <h3>
+              Product redesigns
+            </h3>
+
+            <p>
+
+              Existing experiences
+              rethought through clearer
+              hierarchy and better flows.
+
+            </p>
+
+            <span class="frame-property">
+              Iterate · Compare
+            </span>
+
+          </article>
+
+
+
+          <article
+            class="
+              figma-frame
+              reveal
+            "
+            data-frame="Frame 06"
+          >
+
+            <span class="frame-handle tl"></span>
+            <span class="frame-handle tr"></span>
+            <span class="frame-handle bl"></span>
+            <span class="frame-handle br"></span>
+
+            <div class="capability-number">
+              06
+            </div>
+
+            <h3>
+              Responsive experiences
+            </h3>
+
+            <p>
+
+              Interfaces that behave
+              intentionally across desktop,
+              tablet and mobile.
+
+            </p>
+
+            <span class="frame-property">
+              Desktop · Tablet · Mobile
+            </span>
+
+          </article>
+
+
+        </div>
+
+
+
+        <p
+          class="
+            industry-note
+            reveal
+          "
+        >
+
+          I’ve worked across
+
+          <strong>
+
+            e-commerce,
+            SaaS,
+            healthcare,
+            sports,
+            hospitality,
+            fintech,
+            AI and wellness.
+
+          </strong>
+
+        </p>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- CONTACT -->
+
+    <section
+      class="contact"
+      id="contact"
+    >
+
+      <div class="container">
+
+
+        <div
+          class="
+            contact-heading
+            reveal
+          "
+        >
+
+          <p class="label">
+            Let’s talk
+          </p>
+
+
+          <h2>
+            Seen enough?
+          </h2>
+
+
+          <p>
+
+            If you’ve got a product,
+            an idea, or a design problem
+            worth solving, I’d love to
+            hear about it.
+
+          </p>
+
+        </div>
+
+
+
+        <form
+          class="
+            contact-form
+            reveal
+          "
+          id="contactForm"
+        >
+
+
+          <div class="form-row">
+
+
+            <div class="field">
+
+              <label for="name">
+                Your name
+              </label>
+
+              <input
+                id="name"
+                type="text"
+                placeholder="Your name"
+                required
+              >
+
+            </div>
+
+
+
+            <div class="field">
+
+              <label for="email">
+                Email
+              </label>
+
+              <input
+                id="email"
+                type="email"
+                placeholder="you@example.com"
+                required
+              >
+
+            </div>
+
+
+          </div>
+
+
+
+          <div class="field">
+
+            <label for="project">
+              What are you working on?
+            </label>
+
+            <input
+              id="project"
+              type="text"
+              placeholder="
+                Website, app, redesign...
+              "
+            >
+
+          </div>
+
+
+
+          <div class="field">
+
+            <label for="message">
+              Tell me about it
+            </label>
+
+            <textarea
+              id="message"
+              placeholder="
+                A little context is enough.
+              "
+              required
+            ></textarea>
+
+          </div>
+
+
+
+          <div class="submit-row">
+
+            <button
+              class="submit"
+              type="submit"
+            >
+              Send message
+            </button>
+
+          </div>
+
+
+        </form>
+
+
+
+        <div
+          class="
+            contact-links
+            reveal
+          "
+        >
+
+          <a href="mailto:YOUR-EMAIL">
+            Email
+          </a>
+
+          <a
+            href="YOUR-LINKEDIN"
+            target="_blank"
+          >
+            LinkedIn
+          </a>
+
+          <a
+            href="YOUR-BEHANCE"
+            target="_blank"
+          >
+            Behance
+          </a>
+
+          <a
+            href="YOUR-DRIBBBLE"
+            target="_blank"
+          >
+            Dribbble
+          </a>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
 
   </main>
 
-  <footer id="footer" class="footer position-relative light-background">
-    <div class="container">
-      <h3 class="sitename">Yojana Adhikari</h3>
-      <p>UI/UX designer with a keen eye for aesthetics and user-centered design</p>
-      <div class="social-links d-flex justify-content-center">
-        <a href="https://www.linkedin.com/in/yojana-adhikari-95b56b2a7/" class="bi bi-linkedin" target="_blank" rel="noopener noreferrer"></a>
-        <a href="https://github.com/yojanaadhikari" class="bi bi-github" target="_blank" rel="noopener noreferrer"></a>
-        <a href="https://www.facebook.com/yojana.adhikari.1420" class="bi bi-facebook" target="_blank" rel="noopener noreferrer"></a>
 
-             <!-- <a href="#"><i class="bi bi-instagram"></i></a>-->
-      </div>
-      <div class="container">
-        <div class="copyright">
-         <span>Built with creativity and a sprinkle of joy. Your support means everything!</span>
-        </div>
-      </div>
+
+  <!-- FOOTER -->
+
+  <footer class="footer">
+
+    <div
+      class="
+        container
+        footer-inner
+      "
+    >
+
+      <span>
+        Yojana Adhikari
+      </span>
+
+      <span>
+        UI/UX Designer · Nepal
+      </span>
+
     </div>
+
   </footer>
 
-  <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Preloader -->
-  <div id="preloader"></div>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/typed.js/typed.umd.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script>
 
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
+    /* HEADER */
+
+    const header =
+      document.getElementById(
+        "header"
+      );
+
+
+    window.addEventListener(
+      "scroll",
+      () => {
+
+        header.classList.toggle(
+          "scrolled",
+          window.scrollY > 30
+        );
+
+      }
+    );
+
+
+
+    /* SCROLL REVEALS */
+
+    const revealElements =
+      document.querySelectorAll(
+        ".reveal"
+      );
+
+
+    const observer =
+      new IntersectionObserver(
+
+        entries => {
+
+          entries.forEach(
+            entry => {
+
+              if (
+                entry.isIntersecting
+              ) {
+
+                entry.target
+                  .classList
+                  .add(
+                    "visible"
+                  );
+
+                observer.unobserve(
+                  entry.target
+                );
+
+              }
+
+            }
+          );
+
+        },
+
+        {
+          threshold: 0.08,
+
+          rootMargin:
+            "0px 0px -8% 0px"
+        }
+
+      );
+
+
+    revealElements.forEach(
+      element => {
+
+        observer.observe(
+          element
+        );
+
+      }
+    );
+
+
+
+    /* CONTACT FORM DEMO */
+
+    const form =
+      document.getElementById(
+        "contactForm"
+      );
+
+
+    form.addEventListener(
+      "submit",
+      event => {
+
+        event.preventDefault();
+
+      }
+    );
+
+  </script>
+
 
 </body>
 </html>
