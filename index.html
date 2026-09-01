@@ -6130,21 +6130,52 @@
 }
 
   
-/* FIX 03 MOBILE OVERLAP */
+/* REAL FIX FOR 03 ON MOBILE */
 
 @media (max-width: 700px) {
 
+  .btw-architecture-scene {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+
+    padding:
+      60px
+      14px
+      24px !important;
+  }
+
   .btw-architecture-scene .btw-ia {
-    transform: translateY(-55px) scale(0.70) !important;
-    transform-origin: center center;
+    width: 100% !important;
+    height: 390px !important;
+
+    margin: 0 auto !important;
+
+    transform: none !important;
+
+    flex-shrink: 0;
   }
 
   .btw-architecture-scene .btw-process-copy {
-    bottom: 12px !important;
+    position: static !important;
+
+    left: auto !important;
+    bottom: auto !important;
+
+    transform: none !important;
+
     width: 90% !important;
+
+    margin:
+      18px
+      auto
+      0 !important;
 
     font-size: 12px !important;
     line-height: 1.5 !important;
+
+    text-align: center;
   }
 
 }
