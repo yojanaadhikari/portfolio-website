@@ -6129,34 +6129,44 @@
   border-color: rgba(255, 255, 255, 0.18) !important;
 }
 
-  
-/* REAL FIX FOR 03 ON MOBILE */
+  /* FINAL MOBILE FIX FOR 03 */
 
 @media (max-width: 700px) {
 
+  /* give mobile scenes enough vertical room */
+  .btw-canvas {
+    height: 660px !important;
+  }
+
+  /* 03 scene gets a real top + bottom layout */
   .btw-architecture-scene {
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
+    display: grid !important;
+
+    grid-template-rows:
+      430px
+      auto !important;
+
+    align-content: center !important;
+
+    gap: 26px !important;
 
     padding:
-      60px
+      50px
       14px
       24px !important;
   }
 
+  /* diagram owns its own space */
   .btw-architecture-scene .btw-ia {
     width: 100% !important;
-    height: 390px !important;
+    height: 430px !important;
 
-    margin: 0 auto !important;
+    margin: 0 !important;
 
     transform: none !important;
-
-    flex-shrink: 0;
   }
 
+  /* text now sits BELOW the diagram */
   .btw-architecture-scene .btw-process-copy {
     position: static !important;
 
@@ -6167,15 +6177,12 @@
 
     width: 90% !important;
 
-    margin:
-      18px
-      auto
-      0 !important;
+    margin: 0 auto !important;
 
     font-size: 12px !important;
-    line-height: 1.5 !important;
+    line-height: 1.55 !important;
 
-    text-align: center;
+    text-align: center !important;
   }
 
 }
