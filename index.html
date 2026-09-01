@@ -5718,68 +5718,144 @@
      04 DESIGN SYSTEM
   ========================= */
 
-  .btw-system {
-    width: 100%;
+  /* =========================
+   04 DESIGN SYSTEM
+========================= */
 
-    grid-template-columns: 1fr;
+.btw-system {
+  width: 100%;
 
-    gap: 22px;
-  }
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 
-  .btw-divider {
-    display: none;
-  }
+  gap: 28px 18px;
 
-  /*
-    Previously components were hidden.
-    Now all three sections remain visible.
-  */
-
-  .btw-system-block:last-child {
-    display: block;
-  }
-
-  .btw-system-block small {
-    margin-bottom: 12px;
-  }
-
-  .btw-system-aa {
-    margin-bottom: 14px;
-
-    font-size: 48px;
-  }
-
-  .btw-system-line.big {
-    width: 110px;
-  }
-
-  .btw-system-colors i {
-    width: 28px;
-    height: 28px;
-  }
-
-  .btw-spacing {
-    height: 32px;
-
-    margin-top: 16px;
-
-    gap: 12px;
-  }
-
-  .btw-component-button,
-  .btw-component-input {
-    width: 160px;
-
-    padding:
-      9px
-      12px;
-  }
-
-  .btw-component-card {
-    width: 190px;
-  }
+  align-items: start;
+}
 
 
+/* TYPOGRAPHY + FOUNDATION SIDE BY SIDE */
+
+.btw-system-block {
+  min-width: 0;
+}
+
+
+.btw-system-block small {
+  margin-bottom: 14px;
+
+  font-size: 8px;
+
+  letter-spacing: .12em;
+}
+
+
+/* TYPOGRAPHY */
+
+.btw-system-aa {
+  margin-bottom: 18px;
+
+  font-size: 54px;
+  line-height: 1;
+}
+
+
+.btw-system-line.big {
+  width: 100%;
+  max-width: 120px;
+
+  height: 7px;
+}
+
+
+.btw-system-line {
+  width: 88%;
+
+  height: 5px;
+}
+
+
+.btw-system-line.short {
+  width: 55%;
+}
+
+
+/* FOUNDATION */
+
+.btw-system-colors {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 32px);
+
+  gap: 7px;
+}
+
+
+.btw-system-colors i {
+  width: 32px;
+  height: 32px;
+}
+
+
+.btw-spacing {
+  height: auto;
+
+  margin-top: 24px;
+
+  gap: 10px;
+
+  align-items: flex-end;
+}
+
+
+/* HIDE DIVIDERS */
+
+.btw-divider {
+  display: none;
+}
+
+
+/* COMPONENTS GO FULL WIDTH BELOW */
+
+.btw-system-block:last-child {
+  display: block;
+
+  grid-column: 1 / -1;
+
+  margin-top: 6px;
+}
+
+
+.btw-component-button,
+.btw-component-input {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding:
+    11px
+    14px;
+
+  margin-bottom: 10px;
+}
+
+
+.btw-component-card {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 10px;
+}
+
+
+.btw-thumbnail {
+  width: 58px;
+  height: 48px;
+
+  flex-shrink: 0;
+}
 
   /* =========================
      05 FINAL INTERFACE
