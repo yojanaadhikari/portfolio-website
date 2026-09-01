@@ -1092,7 +1092,7 @@
     }
 
 
-    .behind-heading p {
+    .behind-heading > p:not(.label) {
       max-width: 600px;
 
       margin:
@@ -3078,11 +3078,6 @@
 
     <!-- BEHIND THE WORK -->
 
-  <!-- =========================================================
-     BEHIND THE WORK
-     REPLACE YOUR ENTIRE OLD SECTION WITH THIS
-========================================================= -->
-
 <section class="section behind" id="behindWork">
 
   <!-- KEEPING YOUR EXISTING WEBSITE HEADING STYLE -->
@@ -3090,7 +3085,7 @@
 
     <div class="behind-heading reveal">
 
-      <p class="section-label">
+      <p class="label">
         BEHIND THE WORK
       </p>
 
@@ -5426,10 +5421,7 @@
 /* ============================================================
    MOBILE
 ============================================================ */
-
-/* ============================================================
-   MOBILE - IMPROVED
-============================================================ */
+  
 
 @media (max-width: 700px) {
 
@@ -5737,10 +5729,6 @@
   /* =========================
      04 DESIGN SYSTEM
   ========================= */
-
-  /* =========================
-   04 DESIGN SYSTEM
-========================= */
 
 .btw-system {
   width: 100%;
