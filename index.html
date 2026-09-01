@@ -5407,104 +5407,445 @@
    MOBILE
 ============================================================ */
 
+/* ============================================================
+   MOBILE - IMPROVED
+============================================================ */
+
 @media (max-width: 700px) {
 
+  /* =========================
+     GENERAL
+  ========================= */
+
   .btw-process {
-    height: 500vh;
-
-    margin-top: 40px;
+    height: 520vh;
+    margin-top: 48px;
   }
-
 
   .btw-sticky {
-    top: 55px;
+    top: 64px;
   }
-
 
   .btw-canvas {
-    width:
-      calc(100% - 32px);
+    width: calc(100% - 24px);
 
-    aspect-ratio:
-      1 / 1.05;
+    /* Don't force desktop ratio on mobile */
+    aspect-ratio: auto;
+
+    height: clamp(
+      500px,
+      72svh,
+      620px
+    );
+
+    overflow: hidden;
   }
-
 
   .btw-scene {
     padding:
-      35px
-      12px;
+      48px
+      16px
+      24px;
   }
 
+  /* PROCESS NUMBER */
+
+  .btw-step-number {
+    top: 16px;
+    left: 16px;
+
+    font-size: 11px;
+  }
+
+
+
+  /* =========================
+     01 MOODBOARD
+  ========================= */
 
   .btw-moodboard {
     width: 100%;
 
-    grid-template-columns:
-      1fr
-      1fr;
+    grid-template-columns: 1fr;
+
+    gap: 12px;
   }
 
+  .btw-mood-card {
+    min-height: 190px;
+
+    padding: 18px;
+  }
+
+  /* Keep only 2 cards on mobile */
 
   .btw-mood-card:nth-child(3) {
     display: none;
   }
 
+  .btw-abstract {
+    height: 100px;
+
+    margin-bottom: 14px;
+  }
+
+  .btw-abstract-one {
+    width: 100px;
+    height: 100px;
+  }
+
+  .btw-abstract-two {
+    width: 90px;
+    height: 130px;
+  }
+
+  .btw-aa {
+    margin-top: 18px;
+
+    font-size: 54px;
+  }
+
+  .btw-type-lines {
+    margin-top: 18px;
+  }
+
+
+
+  /* =========================
+     02 WIREFRAMES
+  ========================= */
 
   .btw-wireframes {
-    transform:
-      scale(.55);
+    width: 100%;
+
+    transform: none;
+
+    gap: 14px;
   }
 
+  /*
+    On desktop there are:
+    Phone → Arrow → Phone → Arrow → Phone → Arrow → Phone
+
+    On mobile keep only:
+    Phone → Arrow → Phone
+  */
+
+  .btw-wireframes > :nth-child(n + 4) {
+    display: none;
+  }
+
+  .btw-phone {
+    width: 135px;
+    height: 285px;
+
+    flex-shrink: 0;
+
+    padding:
+      28px
+      12px
+      14px;
+
+    border-radius: 22px;
+  }
+
+  .btw-island {
+    top: 8px;
+
+    width: 34px;
+    height: 6px;
+  }
+
+  .btw-wire-hero {
+    height: 72px;
+
+    margin-bottom: 15px;
+  }
+
+  .btw-wire-title.top {
+    margin-top: 14px;
+    margin-bottom: 18px;
+  }
+
+  .btw-input {
+    height: 28px;
+
+    margin-bottom: 9px;
+  }
+
+  .btw-grid {
+    gap: 6px;
+
+    margin-top: 16px;
+  }
+
+  .btw-grid i {
+    height: 48px;
+  }
+
+  .btw-wire-button {
+    left: 12px;
+    right: 12px;
+    bottom: 14px;
+
+    height: 25px;
+  }
+
+  .btw-arrow {
+    width: 20px;
+  }
+
+
+
+  /* =========================
+     03 INFORMATION ARCHITECTURE
+  ========================= */
 
   .btw-ia {
-    width: 115%;
+    width: 100%;
+    height: 470px;
 
-    transform:
-      scale(.78);
+    transform: none;
+
+    /*
+      Mobile version uses a vertical structure
+      instead of squeezing the desktop diagram.
+    */
+
+    background:
+
+      linear-gradient(
+        rgba(255,255,255,.18),
+        rgba(255,255,255,.18)
+      )
+      center 40px /
+      1px 285px
+      no-repeat,
+
+      linear-gradient(
+        90deg,
+        rgba(255,255,255,.18),
+        rgba(255,255,255,.18)
+      )
+      center 365px /
+      70% 1px
+      no-repeat;
   }
 
+  /* Desktop SVG isn't useful at this width */
+
+  .btw-ia-svg {
+    display: none;
+  }
+
+  .btw-node {
+    min-width: 95px;
+
+    padding:
+      9px
+      12px;
+
+    font-size: 10px;
+
+    left: 50% !important;
+
+    transform:
+      translate(-50%, -50%);
+  }
+
+  .btw-architecture-scene.active
+  .btw-node {
+    transform:
+      translate(-50%, -50%);
+  }
+
+
+  /* START */
+
+  .btw-node:nth-of-type(1) {
+    top: 40px !important;
+  }
+
+  /* DISCOVER */
+
+  .btw-node:nth-of-type(2) {
+    top: 100px !important;
+  }
+
+  /* DEFINE */
+
+  .btw-node:nth-of-type(3) {
+    top: 160px !important;
+  }
+
+  /* DESIGN */
+
+  .btw-node:nth-of-type(4) {
+    top: 220px !important;
+  }
+
+  /* PRODUCT */
+
+  .btw-node:nth-of-type(5) {
+    top: 280px !important;
+  }
+
+
+  /* FINAL THREE BRANCHES */
+
+  .btw-node:nth-of-type(6) {
+    left: 18% !important;
+    top: 405px !important;
+  }
+
+  .btw-node:nth-of-type(7) {
+    left: 50% !important;
+    top: 405px !important;
+  }
+
+  .btw-node:nth-of-type(8) {
+    left: 82% !important;
+    top: 405px !important;
+  }
+
+  .btw-node.small {
+    min-width: 82px;
+  }
+
+
+
+  /* =========================
+     04 DESIGN SYSTEM
+  ========================= */
 
   .btw-system {
     width: 100%;
 
-    grid-template-columns:
-      1fr
-      1fr;
+    grid-template-columns: 1fr;
 
-    gap: 28px;
+    gap: 22px;
   }
-
 
   .btw-divider {
     display: none;
   }
 
+  /*
+    Previously components were hidden.
+    Now all three sections remain visible.
+  */
 
   .btw-system-block:last-child {
-    display: none;
+    display: block;
   }
 
+  .btw-system-block small {
+    margin-bottom: 12px;
+  }
+
+  .btw-system-aa {
+    margin-bottom: 14px;
+
+    font-size: 48px;
+  }
+
+  .btw-system-line.big {
+    width: 110px;
+  }
+
+  .btw-system-colors i {
+    width: 28px;
+    height: 28px;
+  }
+
+  .btw-spacing {
+    height: 32px;
+
+    margin-top: 16px;
+
+    gap: 12px;
+  }
+
+  .btw-component-button,
+  .btw-component-input {
+    width: 160px;
+
+    padding:
+      9px
+      12px;
+  }
+
+  .btw-component-card {
+    width: 190px;
+  }
+
+
+
+  /* =========================
+     05 FINAL INTERFACE
+  ========================= */
+
+  .btw-final {
+    width: 100%;
+
+    justify-content: center;
+
+    gap: 0;
+  }
 
   .btw-browser {
-    width: 360px;
-  }
+    width: 100%;
 
+    max-width: 340px;
+  }
 
   .btw-browser-body {
-    padding: 24px;
+    min-height: 270px;
 
-    gap: 18px;
+    padding: 20px;
+
+    grid-template-columns:
+      .9fr
+      1.1fr;
+
+    gap: 14px;
   }
 
+  .btw-browser-visual {
+    height: 155px;
+  }
+
+  .btw-visual-main {
+    inset:
+      16px
+      12px;
+  }
+
+  .btw-float {
+    width: 62px;
+    height: 46px;
+  }
+
+  .btw-copy-title {
+    height: 10px;
+  }
+
+  .btw-copy-body {
+    height: 4px;
+  }
+
+  .btw-copy-button {
+    width: 72px;
+    height: 25px;
+
+    margin-top: 20px;
+  }
 
   .btw-final-text {
     display: none;
   }
 
 }
-
-
 
 /* ============================================================
    ACCESSIBILITY
